@@ -1,10 +1,6 @@
 ﻿using Bidor.Dados;
 using Bidor.Dados.Entidades;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bidor.Dominio.Servicos.Implementacoes
 {
@@ -16,9 +12,31 @@ namespace Bidor.Dominio.Servicos.Implementacoes
         {
             _contexto = contexto;
         }
+
+        public Aluno Alterar(int id, Aluno aluno)
+        {
+            _contexto.Aluno.Update(aluno);
+            _contexto.SaveChanges();
+            return aluno;
+        }
+
         public IQueryable<Aluno> Alunos()
         {
             return _contexto.Aluno;
+        }
+
+        public bool Excluir(int id)
+        {
+            var aluno = _contexto.Find<Aluno>(id);
+            _contexto.Aluno.Remove(aluno);
+            return _contexto.SaveChanges() > 0;
+        }
+
+        public Aluno Inserir(Aluno aluno)
+        {
+            _contexto.Aluno.Add(aluno);
+            _contexto.SaveChanges();
+            return aluno;
         }
     }
 }

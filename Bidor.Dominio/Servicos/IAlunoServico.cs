@@ -10,5 +10,8 @@ namespace Bidor.Dominio.Servicos
     public interface IAlunoServico
     {
         IQueryable<Aluno> Alunos();
+        Aluno Inserir(Aluno aluno);
+        Aluno Alterar(int id, Aluno aluno);
+        bool Excluir(int id);
     }
 }

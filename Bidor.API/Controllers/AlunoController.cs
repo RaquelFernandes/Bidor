@@ -16,12 +16,36 @@ namespace Bidor.API.Controllers
 
         public AlunoController(IAlunoServico alunoServico)
         {
-            _alunoServico= alunoServico;
+            _alunoServico = alunoServico;
         }
+
         [HttpGet]
         public IEnumerable<Aluno> Index()
         {
             return _alunoServico.Alunos().ToList();
         }
+
+        [HttpPost]
+        public IActionResult Inserir([FromBody] Aluno aluno)
+        {
+            var alunoInserido = _alunoServico.Inserir(aluno);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Alterar(int id, [FromBody] Aluno aluno)
+        {
+            var alunoInserido = _alunoServico.Alterar(id,aluno);
+            return Ok();
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult Excluir(int id)
+        {
+            bool excluido= _alunoServico.Excluir(id);
+            return Ok();
+        }
+
     }
 }
